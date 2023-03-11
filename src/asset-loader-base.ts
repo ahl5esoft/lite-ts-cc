@@ -1,5 +1,7 @@
-export abstract class AssetServiceBase<T> {
-    public static ctor = 'AssetServiceBase';
+import { Asset } from 'cc';
 
-    public abstract load<TAsset extends T>(typer: new () => TAsset, path: string): Promise<TAsset>;
+export abstract class AssetLoaderBase {
+    public static ctor = 'AssetLoaderBase';
+
+    public abstract load<T extends Asset>(typer: new () => T, path: string): Promise<T>;
 }

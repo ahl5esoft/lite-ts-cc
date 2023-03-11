@@ -1,12 +1,13 @@
-declare abstract class AssetServiceBase<T> {
+/// <reference types="./temp/declarations/cc" />
+/// <reference types="./temp/declarations/cc" />
+declare abstract class AssetLoaderBase {
     static ctor: string;
-    abstract load<TAsset extends T>(typer: new () => TAsset, path: string): Promise<TAsset>;
+    abstract load<T extends Asset>(typer: new () => T, path: string): Promise<T>;
 }
-declare class CcAssetService<T> extends AssetServiceBase<T> {
+declare class CcAssetLoader extends AssetLoaderBase {
     private m_LoadedAsset;
-    private m_Cc;
     constructor(m_LoadedAsset: {
-        [path: string]: T;
-    }, m_Cc: any);
-    load<TAsset extends T>(typer: new () => TAsset, pathString: string): Promise<TAsset>;
+        [path: string]: Asset;
+    });
+    load<T extends Asset>(typer: new () => T, pathString: string): Promise<T>;
 }

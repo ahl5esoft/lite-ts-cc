@@ -35,5 +35,8 @@
     "release": "npm run build && npm publish && npm config delete https-proxy && npm config set registry=https://registry.npm.taobao.org",
     "test": "mocha -t 30s -r ./node_modules/ts-node/register/index.js --exit"
   },
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "dependencies": {
+    "lite-ts-ioc": "^1.0.0"
+  }
 }

@@ -19,6 +19,12 @@
         "removeComments": true,
         "skipLibCheck": true,
         "target": "es6",
+        "types": [
+            "./temp/declarations/cc",
+            "./temp/declarations/jsb",
+            "./temp/declarations/cc.custom-macro",
+            "./temp/declarations/cc.env"
+        ],
     },
     "exclude": [
         "node_modules"
