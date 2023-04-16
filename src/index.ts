@@ -6,6 +6,7 @@ export * from './create-view';
 export * from './i-view';
 export * from './lang-accessor-base';
 export * from './local-storage-config-load-handler';
+export * from './modal-service';
 export * from './modal-service-base';
 export * from './mvvm-member-factory';
 export * from './mvvm-member-factory-base';

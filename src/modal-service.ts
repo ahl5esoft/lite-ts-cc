@@ -1,16 +1,13 @@
 import { isValid } from 'cc';
 
-import { AssetLoaderBase } from './asset-loader-base';
-import { IView } from './i-view';
+import { CreateView } from './create-view';
 import { ModalServiceBase } from './modal-service-base';
 import { ModalServiceOpenOption } from './modal-service-open-option';
 import { CcView } from './view';
-import { ViewInitOption } from './view-init-option';
 
 export class CcModalService extends ModalServiceBase {
     public constructor(
-        private m_AssetLoader: AssetLoaderBase,
-        private m_CreateViewFunc: (opt: ViewInitOption<void>, assetLoader: AssetLoaderBase) => Promise<IView<void>>,
+        private m_CreateViewFunc: CreateView,
     ) {
         super();
     }
@@ -36,7 +33,7 @@ export class CcModalService extends ModalServiceBase {
         this.modal[viewID] ??= await this.m_CreateViewFunc({
             input: opt?.input,
             viewID,
-        }, this.m_AssetLoader);
+        });
         this.modal[viewID].node.active = true;
         this.modal[viewID].node.setSiblingIndex(opt?.zIndex ?? 10);
         if (opt?.lazyArg)

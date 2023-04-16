@@ -8,7 +8,8 @@ import { ViewInitOption } from './view-init-option';
 
 export function ccCreateCanvasView(assetLoader: AssetLoaderBase, canvas: Node): CreateView {
     return async (opt: ViewInitOption<void>) => {
-        const prefab = await assetLoader.load(Prefab, `${opt.viewID}${opt.viewID.includes(':') ? '/' : ':'}canvas.prefab`);
+        const path = opt.viewID + '/';
+        const prefab = await assetLoader.load(Prefab, `${path.replace('/', ':')}canvas.prefab`);
         const node = instantiate(prefab);
         const view = node.getComponent(CcView);
         if (view) {
