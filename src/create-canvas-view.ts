@@ -13,7 +13,7 @@ export function ccCreateCanvasView(assetLoader: AssetLoaderBase, canvas: Node): 
         const node = instantiate(prefab);
         const view = node.getComponent(CcView);
         if (view) {
-            view.init({
+            await view.init({
                 ...opt,
                 nodeParent: canvas
             });
