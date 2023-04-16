@@ -1,9 +1,9 @@
 import * as cc from 'cc';
 
 import { AssetLoaderBase } from './asset-loader-base';
-import { ComponentMemberSetter } from './component-member-setter';
 import { IMvvmMember, MvvmGetter, MvvmMapping } from './i-mvvm-member';
 import { IMvvmMemberSetter } from './i-mvvm-member-setter';
+import { MvvmComponentMemberSetter } from './mvvm-component-member-setter';
 import { MvvmPrefabMemberSetter } from './mvvm-prefab-member-setter';
 import { MvvmTweenMemberSetter } from './mvvm-tween-member-setter';
 import { MvvmNodeMemberSetter } from './mvvm-node-member-setter';
@@ -55,7 +55,7 @@ export class MvvmMember implements IMvvmMember {
                         path: v
                     }, this.node);
                 } else {
-                    memo[r] = this.m_Mapping.type ? new ComponentMemberSetter(this.m_AssetLoader, this.component, v) : new MvvmNodeMemberSetter(this.node, v);
+                    memo[r] = this.m_Mapping.type ? new MvvmComponentMemberSetter(this.m_AssetLoader, this.component, v) : new MvvmNodeMemberSetter(this.node, v);
                 }
             } else {
                 memo[r] = new MvvmTweenMemberSetter(this.node, v);

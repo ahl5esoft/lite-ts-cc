@@ -3,7 +3,7 @@ import { Component, SpriteFrame } from 'cc';
 import { IMvvmMemberSetter } from './i-mvvm-member-setter';
 import { AssetLoaderBase } from './asset-loader-base';
 
-export class ComponentMemberSetter implements IMvvmMemberSetter {
+export class MvvmComponentMemberSetter implements IMvvmMemberSetter {
     public constructor(
         private m_AssetLoader: AssetLoaderBase,
         private m_Component: Component,

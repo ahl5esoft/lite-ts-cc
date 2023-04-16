@@ -2,8 +2,9 @@ import { instantiate, Node, Prefab } from 'cc';
 
 import { AssetLoaderBase } from './asset-loader-base';
 import { CreateView } from './create-view';
-import { IView, ViewInitOption } from './i-view';
+import { IView } from './i-view';
 import { CcView } from './view';
+import { ViewInitOption } from './view-init-option';
 
 export function ccCreateCanvasView(assetLoader: AssetLoaderBase, canvas: Node): CreateView {
     return async (opt: ViewInitOption<void>) => {

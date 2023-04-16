@@ -3,8 +3,9 @@ import { ioc } from 'lite-ts-ioc';
 
 import { AssetLoaderBase } from './asset-loader-base';
 import { IMvvmMember, MvvmMapping } from './i-mvvm-member';
-import { IView, ViewInitOption } from './i-view';
+import { IView } from './i-view';
 import { MvvmMemerFactoryBase } from './mvvm-member-factory-base';
+import { ViewInitOption } from './view-init-option';
 
 export class CcView<T> extends cc.Component implements IView<T> {
     private m_ActiveAction: () => void;
