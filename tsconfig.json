@@ -16,6 +16,7 @@
         "target": "es6"
     },
     "include": [
+        "./sh/**/*.ts",
         "./src/**/*.ts"
     ]
 }

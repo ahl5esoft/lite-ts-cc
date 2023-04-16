@@ -1,6 +1,7 @@
 export * from './asset-loader';
 export * from './asset-loader-base';
 export * from './asset-loader-config-load-handler';
+export * from './create-canvas-view';
 export * from './create-view';
 export * from './i-view';
 export * from './lang-accessor-base';
