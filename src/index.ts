@@ -14,6 +14,7 @@ export * from './modal-service';
 export * from './modal-service-base';
 export * from './mvvm-member-factory';
 export * from './mvvm-member-factory-base';
+export { type PrefabVm } from './mvvm-prefab-member-setter';
 export * from './page-service';
 export * from './page-service-base';
 export * from './rpc-lang-accessor';

@@ -5,6 +5,11 @@ import { AssetLoaderBase } from './asset-loader-base';
 import { MvvmMapping } from './i-mvvm-member';
 import { CcView } from './view';
 
+export type PrefabVm = {
+    _index: number;
+    _prefab?: string;
+};
+
 export class MvvmPrefabMemberSetter implements IMvvmMemberSetter {
     private m_Children: { [index: number]: Node; } = {};
 
@@ -20,10 +25,10 @@ export class MvvmPrefabMemberSetter implements IMvvmMemberSetter {
 
     public bindEvent() { }
 
-    public async setValue(values: { _index: number }[]) {
+    public async setValue(values: PrefabVm[]) {
         for (const r of values) {
             if (!this.m_Children[r._index]) {
-                const prefab = await this.m_AssetLoader.load(Prefab, this.m_Mapping.path);
+                const prefab = await this.m_AssetLoader.load(Prefab, r._prefab ?? this.m_Mapping.path);
                 this.m_Children[r._index] = instantiate(prefab);
             }
 
