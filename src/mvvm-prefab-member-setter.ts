@@ -27,14 +27,15 @@ export class MvvmPrefabMemberSetter implements IMvvmMemberSetter {
 
     public async setValue(values: PrefabVm[]) {
         for (const r of values) {
+            const prefabPath = r._prefab ?? this.m_Mapping.path;
             if (!this.m_Children[r._index]) {
-                const prefab = await this.m_AssetLoader.load(Prefab, r._prefab ?? this.m_Mapping.path);
+                const prefab = await this.m_AssetLoader.load(Prefab, prefabPath);
                 this.m_Children[r._index] = instantiate(prefab);
             }
 
             this.m_Children[r._index].getComponent(CcView).init({
                 input: r,
-                viewID: this.m_Mapping.path.replace('.prefab', ''),
+                viewID: prefabPath.replace('.prefab', ''),
                 nodeParent: this.m_ParentNode,
             });
         }
