@@ -6,8 +6,8 @@ describe('src/rpc-lang-accessor.ts', () => {
     describe('.get(...keys: string[])', () => {
         it('ok', async () => {
             const self = new Self(null, {
+                abbr: 'tt',
                 updateInterval: 0,
-                type: 'tt'
             });
 
             Reflect.set(self, 'getContent', () => {
@@ -19,11 +19,11 @@ describe('src/rpc-lang-accessor.ts', () => {
             const res = await self.get('a');
             strictEqual(res, 'aa');
         });
-        
+
         it('{0}', async () => {
             const self = new Self(null, {
+                abbr: 'tt',
                 updateInterval: 0,
-                type: 'tt'
             });
 
             Reflect.set(self, 'getContent', () => {

@@ -4,28 +4,28 @@ import { LangAccessorBase } from './lang-accessor-base';
 
 export class LangConfig {
     public updateInterval: number;
-    public type: string;
+    public abbr: string;
 }
 
 type Response = {
-    content: { [key: string]: string };
     version: number;
     currencySymbol: string;
+    content: { [key: string]: string };
 }
 
 export class RpcLangAccessor extends LangAccessorBase {
     public static route = '/config/get-lang';
 
     private m_Cache: {
-        [langType: string]: {
+        [langAbbr: string]: {
             content: { [key: string]: string };
             updateOn: number;
             version: number;
         }
     } = {};
 
-    public get langType() {
-        return this.m_Config.type;
+    public get langAbbr() {
+        return this.m_Config.abbr;
     }
 
     public constructor(
@@ -34,7 +34,7 @@ export class RpcLangAccessor extends LangAccessorBase {
     ) {
         super();
 
-        this.m_Cache[this.m_Config.type] ??= {
+        this.m_Cache[this.m_Config.abbr] ??= {
             content: {},
             updateOn: 0,
             version: 0,
@@ -65,24 +65,24 @@ export class RpcLangAccessor extends LangAccessorBase {
 
     private async getContent() {
         const now = Date.now();
-        if (now - this.m_Cache[this.langType].updateOn >= this.m_Config.updateInterval) {
+        if (now - this.m_Cache[this.langAbbr].updateOn >= this.m_Config.updateInterval) {
             const resp = await this.m_Rpc.call<Response>({
                 body: {
-                    lang: this.langType,
-                    version: this.m_Cache[this.langType].version,
+                    lang: this.langAbbr,
+                    version: this.m_Cache[this.langAbbr].version,
                 },
                 route: RpcLangAccessor.route,
             });
             if (!resp.err) {
-                this.m_Cache[this.langType].content = {
-                    ...this.m_Cache[this.langType].content,
+                this.m_Cache[this.langAbbr].content = {
+                    ...this.m_Cache[this.langAbbr].content,
                     ...resp.data.content
                 };
-                this.m_Cache[this.langType].updateOn = now;
-                this.m_Cache[this.langType].version = resp.data.version;
+                this.m_Cache[this.langAbbr].updateOn = now;
+                this.m_Cache[this.langAbbr].version = resp.data.version;
             }
         }
 
-        return this.m_Cache[this.langType].content;
+        return this.m_Cache[this.langAbbr].content;
     }
 }
