@@ -5,8 +5,12 @@ import { LangAccessorBase } from './lang-accessor-base';
 
 const { ccclass, property } = _decorator;
 
-@ccclass('CcLang')
+const ctor = 'CcLang';
+
+@ccclass(ctor)
 export class CcLang extends Component {
+    public static ctor = ctor;
+
     private m_Lbl: Label;
 
     @property({ tooltip: '多语言键', type: [CCString] })

@@ -5,6 +5,7 @@
   },
   "dependencies": {
     "lite-ts-config": "^2.1.1",
+    "lite-ts-enum": "^2.10.1",
     "lite-ts-ioc": "^1.2.1",
     "lite-ts-rpc": "^3.10.0"
   },
@@ -32,5 +33,5 @@
     "build": "ts-node sh/build",
     "test": "mocha -t 30s -r ./node_modules/ts-node/register/index.js --exit"
   },
-  "version": "1.4.2"
+  "version": "1.5.2"
 }

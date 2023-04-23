@@ -3,10 +3,15 @@ import * as cc from 'cc';
 import { AssetLoaderBase } from './asset-loader-base';
 import { IMvvmMember, MvvmGetter, MvvmMapping } from './i-mvvm-member';
 import { IMvvmMemberSetter } from './i-mvvm-member-setter';
+import { CcLang } from './lang';
 import { MvvmComponentMemberSetter } from './mvvm-component-member-setter';
 import { MvvmPrefabMemberSetter } from './mvvm-prefab-member-setter';
 import { MvvmTweenMemberSetter } from './mvvm-tween-member-setter';
 import { MvvmNodeMemberSetter } from './mvvm-node-member-setter';
+
+const customComponent = {
+    [CcLang.ctor]: CcLang
+};
 
 export class MvvmMember implements IMvvmMember {
     private m_Getters: MvvmGetter[];
@@ -25,7 +30,7 @@ export class MvvmMember implements IMvvmMember {
     private m_Component: cc.Component;
     protected get component() {
         if (!this.m_Component) {
-            this.m_Component = this.node.getComponent(cc[this.m_Mapping.type]);
+            this.m_Component = this.node.getComponent(cc[this.m_Mapping.type] ?? customComponent[this.m_Mapping.type]);
             if (!this.m_Component)
                 throw new Error(`组件脚本无效: ${JSON.stringify(this.m_Mapping)}`);
         }
@@ -85,7 +90,7 @@ export class MvvmMember implements IMvvmMember {
         }
     }
 
-    public async setValue(prop: string, value: any) {
+    public setValue(prop: string, value: any) {
         this.setter[prop]?.setValue(value);
     }
 }
