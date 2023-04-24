@@ -24,8 +24,11 @@ export class CcEnumItem extends EnumItem {
         return paths.join('');
     }
 
-    public getEncodingKey(attr: string) {
-        return [this.m_EnumName, this.value, attr].join('-');
+    public getEncodingKey(attr?: string) {
+        const parts = [this.m_EnumName, this.value];
+        if (attr)
+            parts.push(attr);
+        return parts.join('-');
     }
 
     public static create(entry: EnumItem, enumName: string) {

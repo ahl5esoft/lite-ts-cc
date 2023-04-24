@@ -33,5 +33,5 @@
     "build": "ts-node sh/build",
     "test": "mocha -t 30s -r ./node_modules/ts-node/register/index.js --exit"
   },
-  "version": "1.5.2"
+  "version": "1.6.2"
 }

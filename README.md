@@ -1,1 +1,1 @@
-# ![Version](https://img.shields.io/badge/version-1.5.2-green.svg)
+# ![Version](https://img.shields.io/badge/version-1.6.2-green.svg)

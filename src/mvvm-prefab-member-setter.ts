@@ -27,18 +27,22 @@ export class MvvmPrefabMemberSetter implements IMvvmMemberSetter {
 
     public setValue(values: PrefabVm[]) {
         const tasks = values.map(async r => {
-            const prefabPath = r._prefab ?? this.m_Mapping.path;
-            if (!this.m_Children[r._index]) {
+            if (r._index > 0) {
+                const prefabPath = r._prefab ?? this.m_Mapping.path;
+                if (this.m_Children[r._index])
+                    return;
+
                 const prefab = await this.m_AssetLoader.load(Prefab, prefabPath);
                 this.m_Children[r._index] = instantiate(prefab);
+                this.m_Children[r._index].setSiblingIndex(r._index);
+                await this.m_Children[r._index].getComponent(CcView).init({
+                    input: r,
+                    viewID: prefabPath.replace('.prefab', ''),
+                    nodeParent: this.m_ParentNode,
+                });
+            } else {
+                this.m_Children[Math.abs(r._index)]?.destroy();
             }
-
-            this.m_Children[r._index].setSiblingIndex(r._index);
-            await this.m_Children[r._index].getComponent(CcView).init({
-                input: r,
-                viewID: prefabPath.replace('.prefab', ''),
-                nodeParent: this.m_ParentNode,
-            });
         });
         Promise.all(tasks).catch(console.error);
     }

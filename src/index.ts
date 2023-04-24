@@ -22,5 +22,6 @@ export * from './number-formatter';
 export * from './page-service';
 export * from './page-service-base';
 export * from './rpc-lang-accessor';
+export * from './toggle-controller';
 export * from './view';
 export * from './view-init-option';
