@@ -1,27 +1,28 @@
-export interface IToggleItem {
-    isToggleEnable: boolean;
-    onToggleDisable(): Promise<void>;
-    onToggleEnable(): Promise<void>;
+export interface IToggle {
+    onToggleBlur(): Promise<void>;
+    onToggleFocus(): Promise<void>;
 }
 
-export class CcToggleController {
-    public m_Item: { [index: number]: IToggleItem; } = {};
+const focusField = 'isToggleFocus';
 
-    public addItem(index: number, item: IToggleItem) {
-        this.m_Item[index] = item;
+export class CcToggleController {
+    public m_Toggle: { [index: number]: IToggle; } = {};
+
+    public addToggle(index: number, item: IToggle) {
+        this.m_Toggle[index] = item;
     }
 
     public async toggle(index: number) {
-        if (this.m_Item[index].isToggleEnable)
+        if (this.m_Toggle[index][focusField])
             return;
 
-        const enableItem = Object.values(this.m_Item).find(r => r.isToggleEnable);
+        const enableItem = Object.values(this.m_Toggle).find(r => r[focusField]);
         if (enableItem) {
-            enableItem.isToggleEnable = false;
-            await enableItem.onToggleDisable();
+            enableItem[focusField] = false;
+            await enableItem.onToggleBlur();
         }
 
-        this.m_Item[index].isToggleEnable = true;
-        await this.m_Item[index].onToggleEnable();
+        this.m_Toggle[index][focusField] = true;
+        await this.m_Toggle[index].onToggleFocus();
     }
 }

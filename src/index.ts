@@ -3,7 +3,6 @@ export * from './asset-loader-base';
 export * from './asset-loader-config-load-handler';
 export * from './create-canvas-view';
 export * from './create-view';
-export * from './enum-item';
 export * from './formatter-factory-base';
 export * from './fsm-appoint';
 export * from './fsm-state-base';
